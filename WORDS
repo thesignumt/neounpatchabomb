@@ -34,7 +34,7 @@ end
 
 
 local words = _G.wordbomb
-ENGLISH_WORDS = merge_lists(words.ENGLISH_WORDS, words.MUSTUSE, words.PERIODIC, words.LONGW)
+ENGLISH_WORDS = merge_lists(words.ENGLISH_WORDS, words.MUSTUSE, words.PERIODIC, words.LONGW, words.HYPHENATED)
 if _G.short then
 	ENGLISH_WORDS = sort_by_len(ENGLISH_WORDS)
 else
