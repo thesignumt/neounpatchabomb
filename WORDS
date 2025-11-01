@@ -4,8 +4,9 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmacodeslol/neounpa
 loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmacodeslol/neounpatchabomb/refs/heads/master/periodictable"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmacodeslol/neounpatchabomb/refs/heads/master/longwords"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmacodeslol/neounpatchabomb/refs/heads/master/MUSTUSE"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmacodeslol/neounpatchabomb/refs/heads/master/hyphens"))()
 
-function merge_unique_lists(...)
+function merge_lists(...)
 	local merged_list = {}
 	local seen = {}
 	for _, list in ipairs({ ... }) do
@@ -19,9 +20,23 @@ function merge_unique_lists(...)
 	return merged_list
 end
 
+function sort_by_len(list, descending)
+    local sorted = {table.unpack(list)} -- copy to avoid mutating original
+    table.sort(sorted, function(a, b)
+        if descending == true then
+            return #a > #b  -- long -> short
+        else
+            return #a < #b  -- short -> long
+        end
+    end)
+    return sorted
+end
+
+
 local words = _G.wordbomb
+ENGLISH_WORDS = merge_lists(words.ENGLISH_WORDS, words.MUSTUSE, words.PERIODIC, words.LONGW)
 if _G.short then
-		ENGLISH_WORDS = merge_unique_lists(words.ENGLISH_WORDS, words.MUSTUSE, words.PERIODIC, words.LONGW)
-	else
-		ENGLISH_WORDS = merge_unique_lists(words.MUSTUSE, words.LONGW, words.PERIODIC, words.ENGLISH_WORDS)
-	end
+	ENGLISH_WORDS = sort_by_len(ENGLISH_WORDS)
+else
+	ENGLISH_WORDS = sort_by_len(ENGLISH_WORDS, true)
+end
