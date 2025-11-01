@@ -1,4 +1,5 @@
 _G.wordbomb = {}
+_G.wordbomb.used = {}
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmacodeslol/neounpatchabomb/refs/heads/master/englishwords"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmacodeslol/neounpatchabomb/refs/heads/master/periodictable"))()
@@ -20,23 +21,37 @@ function merge_lists(...)
 	return merged_list
 end
 
--- function sort_by_len(list, descending)
---     local sorted = {table.unpack(list)} -- copy to avoid mutating original
---     table.sort(sorted, function(a, b)
---         if descending == true then
---             return #a > #b  -- long -> short
---         else
---             return #a < #b  -- short -> long
---         end
---     end)
---     return sorted
--- end
 
+local wb = _G.wordbomb
+_G.wordbomb.words = merge_lists(wb.ENGLISH_WORDS, wb.MUSTUSE, wb.PERIODIC, wb.LONGW, wb.HYPHENATED)
 
-local words = _G.wordbomb
-ENGLISH_WORDS = merge_lists(words.ENGLISH_WORDS, words.MUSTUSE, words.PERIODIC, words.LONGW, words.HYPHENATED)
-if _G.short then
-	ENGLISH_WORDS = (ENGLISH_WORDS)
-else
-	ENGLISH_WORDS = (ENGLISH_WORDS)
+function wb.has(val)
+	for i, v in pairs(wb.used) do
+		if v == val then
+			return true
+		end
+	end
+	return false
 end
+
+function wb.find(str)
+	local hyphen = str:sub(1,1) == "-"
+	if hyphen == true then
+		local str = str:sub(2)
+	end
+
+	local found = nil
+	for i, v in pairs(hyphen and wb.HYPHENATED or wb.words) do
+		if
+			string.find(v, str:lower()
+			and not wb.has(v)
+		then
+			found = v
+			table.insert(wb.used, v)
+			break
+		end
+	end
+	return found
+end
+
+return _G.wordbomb
