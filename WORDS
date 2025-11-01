@@ -23,10 +23,21 @@ end
 
 
 local wb = _G.wordbomb
-_G.wordbomb.words = merge_lists(wb.ENGLISH_WORDS, wb.MUSTUSE, wb.PERIODIC, wb.LONGW, wb.HYPHENATED)
+wb.small = merge_lists(wb.ENGLISH_WORDS, wb.MUSTUSE, wb.PERIODIC, wb.LONGW, wb.HYPHENATED)
+wb.long = merge_lists(wb.LONGW, wb.MUSTUSE, wb.HYPHENATED, wb.ENGLISH_WORDS, wb.PERIODIC)
+wb.hyphen = merge_lists(wb.HYPHENATED, wb.LONGW, wb.MUSTUSE, wb.PERIODIC, wb.ENGLISH_WORDS)
+wb.current = wb.small
 
-function wb.has(val)
-	for i, v in pairs(wb.used) do
+function wb.set_dict(dname)
+	local dnames = {"small", "long", "hyphen"}
+	if not (wb.has(dname, dnames) or type(dname) == "string") then
+		return
+	end
+	wb.current = wb[dname]
+end
+
+function wb.has(val, spec)
+	for i, v in pairs(spec or wb.used) do
 		if v == val then
 			return true
 		end
@@ -41,7 +52,7 @@ function wb.find(str)
 	end
 
 	local found = nil
-	for i, v in pairs(hyphen and wb.HYPHENATED or wb.words) do
+	for i, v in pairs(hyphen and wb.HYPHENATED or wb[wb.current]) do
 		if
 			string.find(v, str:lower())
 			and not wb.has(v)
