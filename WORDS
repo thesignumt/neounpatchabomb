@@ -20,23 +20,23 @@ function merge_lists(...)
 	return merged_list
 end
 
-function sort_by_len(list, descending)
-    local sorted = {table.unpack(list)} -- copy to avoid mutating original
-    table.sort(sorted, function(a, b)
-        if descending == true then
-            return #a > #b  -- long -> short
-        else
-            return #a < #b  -- short -> long
-        end
-    end)
-    return sorted
-end
+-- function sort_by_len(list, descending)
+--     local sorted = {table.unpack(list)} -- copy to avoid mutating original
+--     table.sort(sorted, function(a, b)
+--         if descending == true then
+--             return #a > #b  -- long -> short
+--         else
+--             return #a < #b  -- short -> long
+--         end
+--     end)
+--     return sorted
+-- end
 
 
 local words = _G.wordbomb
 ENGLISH_WORDS = merge_lists(words.ENGLISH_WORDS, words.MUSTUSE, words.PERIODIC, words.LONGW, words.HYPHENATED)
 if _G.short then
-	ENGLISH_WORDS = sort_by_len(ENGLISH_WORDS)
+	ENGLISH_WORDS = (ENGLISH_WORDS)
 else
-	ENGLISH_WORDS = sort_by_len(ENGLISH_WORDS, true)
+	ENGLISH_WORDS = (ENGLISH_WORDS)
 end
