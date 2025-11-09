@@ -47,6 +47,8 @@ function wb.has(val, spec)
 end
 
 function wb.find(str)
+	print('find')
+	print(str)
 	local hyphen = str:sub(1,1) == "-"
 	if hyphen == true then
 		local str = str:sub(2)
