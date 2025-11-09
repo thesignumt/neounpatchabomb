@@ -49,17 +49,16 @@ end
 function wb.find(str)
 	print('find')
 	print(str)
-	print('checking hyphen')
 	local hyphen = string.sub(str, 1, 1) == "-"
 	if hyphen == true then
 		local str = string.sub(str, 2)
-		print(str)
 	end
 
 	local found = nil
-	for i, v in ipairs(hyphen and wb.HYPHENATED or wb[wb.current]) do
+	local d = hyphen == true and wb.hyphen or wb[wb.current]
+	for i, v in ipairs(d) do
 		if
-			string.find(v, str:lower())
+			string.find(v, string.lower(str))
 			and not wb.has(v)
 		then
 			found = v
