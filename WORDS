@@ -45,7 +45,7 @@ function wb.find(str)
 	end
 
 	local found = nil
-	local d = hyphen == true and wb.hyphen or wb.current
+	local d = hyphen == true and wb.HYPHENATED or wb.current
 	for _, v in ipairs(d) do
 		if
 			string.find(v, string.lower(str))
