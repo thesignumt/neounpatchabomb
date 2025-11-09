@@ -1,5 +1,5 @@
 _G.wordbomb = {}
-_G.wordbomb.used = {}
+_G.wordbomb.used = _G.wordbomb.used or {}
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmacodeslol/neounpatchabomb/refs/heads/master/englishwords"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmacodeslol/neounpatchabomb/refs/heads/master/periodictable"))()
@@ -36,14 +36,13 @@ function wb.set_dict(dname)
 	wb.current = wb[dname]
 end
 
-function wb.has(val, spec)
-	spec = spec or {}
-	for i, v in pairs((spec and spec) or wb.used) do
-		if v == val then
-			return true
-		end
-	end
-	return false
+function wb.has(value)
+    for _, v in ipairs(wb.used) do
+        if v == value then
+            return true
+        end
+    end
+    return false
 end
 
 function wb.find(str)
@@ -58,7 +57,7 @@ function wb.find(str)
 	print(hyphen)
 	local d = hyphen == true and wb.hyphen or wb.current
 	print(d)
-	for i, v in ipairs(d) do
+	for _, v in ipairs(d) do
 		if
 			string.find(v, string.lower(str))
 			and not wb.has(v)
