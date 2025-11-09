@@ -28,21 +28,6 @@ wb.long = merge_lists(wb.LONGW, wb.MUSTUSE, wb.HYPHENATED, wb.ENGLISH_WORDS, wb.
 wb.hyphen = merge_lists(wb.HYPHENATED, wb.LONGW, wb.MUSTUSE, wb.PERIODIC, wb.ENGLISH_WORDS)
 wb.current = wb.small
 
-function wb.wb(dname)
-	local valid = {"small", "long", "hyphen"}
-
-	-- ensure it's a string and one of the valid names
-	local name = nil
-	if type(dname) ~= "string" or not wb.has(dname, valid) then
-		print('⚠️ dname must be either "small", "long", or "hyphen"')
-		return
-	end
-
-	-- safe assignment
-	wb.current = wb[name or dname]
-	print("✅ wb.current set to wb." .. name or dname)
-end
-
 function wb.has(value, list)
     list = list or wb.used
     for _, v in ipairs(list) do
@@ -74,4 +59,12 @@ function wb.find(str)
 	return found
 end
 
-return { find = wb.find, set_dict = wb.wb }
+return function(dname)
+	lcoal out = { find = wb.find }
+	if type(dname) ~= "string" or not wb.has(dname, {"small","long","hyphen"}) then
+		print('⚠️ dname must be either "small", "long", or "hyphen"')
+		return
+	end
+	wb.current = wb[dname]
+	return out
+end
