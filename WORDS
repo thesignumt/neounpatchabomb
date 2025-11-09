@@ -60,7 +60,6 @@ function wb.find(str)
 end
 
 return function(dname)
-	local out = { find = wb.find }
 	if dname == nil or s == "" then
 		dname = "small"
 	elseif type(dname) ~= "string" or not wb.has(dname, {"small","long","hyphen"}) then
@@ -68,5 +67,5 @@ return function(dname)
 		return
 	end
 	wb.current = wb[dname]
-	return out
+	return wb
 end
