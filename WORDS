@@ -61,7 +61,9 @@ end
 
 return function(dname)
 	lcoal out = { find = wb.find }
-	if type(dname) ~= "string" or not wb.has(dname, {"small","long","hyphen"}) then
+	if dname == nil then
+		dname = "small"
+	elseif type(dname) ~= "string" or not wb.has(dname, {"small","long","hyphen"}) then
 		print('⚠️ dname must be either "small", "long", or "hyphen"')
 		return
 	end
