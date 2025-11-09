@@ -57,7 +57,7 @@ function wb.find(str)
 	end
 
 	local found = nil
-	for i, v in pairs(hyphen and wb.HYPHENATED or wb[wb.current]) do
+	for i, v in ipairs(hyphen and wb.HYPHENATED or wb[wb.current]) do
 		if
 			string.find(v, str:lower())
 			and not wb.has(v)
