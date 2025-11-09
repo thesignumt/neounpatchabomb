@@ -46,17 +46,13 @@ function wb.has(value)
 end
 
 function wb.find(str)
-	print('find')
-	print(str)
 	local hyphen = string.sub(str, 1, 1) == "-"
 	if hyphen == true then
 		local str = string.sub(str, 2)
 	end
 
 	local found = nil
-	print(hyphen)
 	local d = hyphen == true and wb.hyphen or wb.current
-	print(d)
 	for _, v in ipairs(d) do
 		if
 			string.find(v, string.lower(str))
