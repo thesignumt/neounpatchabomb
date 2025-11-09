@@ -50,11 +50,9 @@ function wb.find(str)
 	print('find')
 	print(str)
 	print('checking hyphen')
-	local hyphen = str:sub(1,1) == "-"
-	print('finish hyphen '..hyphen)
-	print(str:sub(1,1))
+	local hyphen = string.sub(str, 1, 1) == "-"
 	if hyphen == true then
-		local str = str:sub(2)
+		local str = string.sub(str, 2)
 		print(str)
 	end
 
