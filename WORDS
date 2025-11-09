@@ -30,15 +30,17 @@ wb.current = wb.small
 
 function wb.set_dict(dname)
 	local dnames = {"small", "long", "hyphen"}
-	if not (wb.has(dname, dnames) or type(dname) == "string") then
+	local contains = wb.has(dname, dnames)
+	if contains ~= true or type(dname) ~= "string") then
 		print('dname must be either "small", "long", or "hyphen"')
 		return
 	end
 	wb.current = wb[dname]
 end
 
-function wb.has(value)
-    for _, v in ipairs(wb.used) do
+function wb.has(value, list)
+    list = list or wb.used
+    for _, v in ipairs(list) do
         if v == value then
             return true
         end
