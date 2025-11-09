@@ -31,6 +31,7 @@ wb.current = wb.small
 function wb.set_dict(dname)
 	local dnames = {"small", "long", "hyphen"}
 	if not (wb.has(dname, dnames) or type(dname) == "string") then
+		print('dname must be either "small", "long", or "hyphen"')
 		return
 	end
 	wb.current = wb[dname]
