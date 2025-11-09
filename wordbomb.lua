@@ -262,8 +262,10 @@ return function(vocab_dict)
 		local script = Instance.new("LocalScript", MainFrame)
 	
 		local player = game.Players.LocalPlayer
-	
-		local wb = loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmacodeslol/neounpatchabomb/refs/heads/master/WORDS"))()(vocab_dict)
+
+		local wb = loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmacodeslol/neounpatchabomb/refs/heads/master/WORDS"))()
+		print(wb)
+		print(vocab_dict)
 	
 		script.Parent.LetterBox.FocusLost:Connect(function(enterPressed)
 			if enterPressed then
