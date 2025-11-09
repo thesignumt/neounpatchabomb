@@ -29,13 +29,17 @@ wb.hyphen = merge_lists(wb.HYPHENATED, wb.LONGW, wb.MUSTUSE, wb.PERIODIC, wb.ENG
 wb.current = wb.small
 
 function wb.set_dict(dname)
-	local dnames = {"small", "long", "hyphen"}
-	local contains = wb.has(dname, dnames)
-	if contains ~= true or type(dname) ~= "string") then
-		print('dname must be either "small", "long", or "hyphen"')
+	local valid = {"small", "long", "hyphen"}
+
+	-- ensure it's a string and one of the valid names
+	if type(dname) ~= "string" or not wb.has(dname, valid) then
+		print('⚠️ dname must be either "small", "long", or "hyphen"')
 		return
 	end
+
+	-- safe assignment
 	wb.current = wb[dname]
+	print("✅ wb.current set to wb." .. dname)
 end
 
 function wb.has(value, list)
