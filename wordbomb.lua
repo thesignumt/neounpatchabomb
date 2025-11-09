@@ -274,7 +274,7 @@ local function LUQKR_fake_script() -- MainFrame.MainScript
 			if subtitle then
 				-- script.Parent.WordText.Text = subtitle .. " - Searching..."
 				-- wait(0.25)
-				word = findWord(subtitle)
+				word = wb.find(subtitle)
 				if word then
 					script.Parent.WordText.Text = word
 					-- setclipboard(word)
