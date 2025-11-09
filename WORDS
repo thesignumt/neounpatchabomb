@@ -66,4 +66,4 @@ function wb.find(str)
 	return found
 end
 
-return _G.wordbomb
+return wb
