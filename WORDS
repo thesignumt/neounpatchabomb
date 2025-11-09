@@ -37,7 +37,8 @@ function wb.set_dict(dname)
 end
 
 function wb.has(val, spec)
-	for i, v in pairs(spec or wb.used) do
+	spec = spec or {}
+	for i, v in pairs((spec and spec) or wb.used) do
 		if v == val then
 			return true
 		end
