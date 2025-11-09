@@ -263,9 +263,7 @@ return function(vocab_dict)
 	
 		local player = game.Players.LocalPlayer
 
-		local wb = loadstring(game:HttpGet("https://raw.githubusercontent.com/thesignumt/neounpatchabomb/refs/heads/master/WORDS"))
-		print(wb)
-		print(vocab_dict)
+		local wb = loadstring(game:HttpGet("https://raw.githubusercontent.com/thesignumt/neounpatchabomb/refs/heads/master/WORDS"))(vocab_dict)
 	
 		script.Parent.LetterBox.FocusLost:Connect(function(enterPressed)
 			if enterPressed then
